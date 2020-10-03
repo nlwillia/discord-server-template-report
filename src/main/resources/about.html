@@ -1,0 +1,36 @@
+<h2>About</h2>
+<p>
+    This is a utility for viewing and analyzing Discord Server Template snapshots.
+</p>
+<p>
+    A <a href="https://support.discord.com/hc/en-us/articles/360041033511-Server-Templates">Server Template</a> is a
+    feature that someone with <strong>Manager Server</strong> can enable.  It's intended to be a way to easily use one
+    server as a template to create other servers.  The template is a snapshot of key information about the server's
+    configuration, including category/channel layout, roles and permission overwrites.
+</p>
+<p>
+    Enabling the Server Template feature doesn't affect the operation of the server in any way.  However, after certain
+    changes are made you'll notice a prompt about the template being stale.  Discord won't update the template automatically;
+    rather you have to go into the UI to force it to regenerate this.  While the template exists you'll have a random
+    key value assigned to identify it.  If you delete the template, that key is gone forever, but you can always just
+    turn it back on and get a new one.
+</p>
+<p>
+    Though still <a href="https://github.com/discord/discord-api-docs/pull/1712">undocumented</a>, the new template
+    function is accessible via an unauthenticated web request to <code>https://discord.com/api/v6/guilds/templates/{key}</code>.
+    Calling this will return a large json document containing information that represents the server.
+</p>
+<p>
+    This tool simply takes the key (or key url) you provide, requests the json and then interprets it in a readable
+    report layout.  It also attempts to analyze roles and permission overwrites to identify settings that may be
+    unnecessary.  A bot could perform a similar function through the Discord API, but this method provides similar detail
+    and does not require that anything join your server.  One limitation of this approach is that member data is not
+    part of the template, so no member overwrites are considered.
+</p>
+<p>
+    <strong>Privacy: </strong> Server Templates do not contain any fundamentally personal information, but they do
+    reveal how you've named roles and channels.  If you enable Server Templates, you are creating a url endpoint in
+    Discord's platform that anyone with your template link can use to read this information.  By entering your link
+    above, you're enabling this service to fetch your template json, format it and present it back to you.  If you do
+    not want your template to be accessible on an ongoing basis, you can always delete or recreate it.
+</p>

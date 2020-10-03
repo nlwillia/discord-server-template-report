@@ -1,0 +1,24 @@
+<h2>Rules</h2>
+<p>
+	Discord <a href="https://discord.com/developers/docs/topics/permissions">permissions</a> follow a set of rules
+	based on role-level grants and permission overrides to individual channels. The <code>@everyone</code> role is
+	special both at the role and override level in that it sets the baseline for subsequent role-based authorizations.
+	Category overwrites are not operative, but serve as a template with which channels can be synchronized (or not).
+</p>
+<h3>Discord Permission Rules</h3>
+<p>Member-specific overwrites are not considered here because a template snapshot contains no member information.</p>
+<ol>
+	<li>Base permissions given to @everyone are applied at a guild level</li>
+	<li>Permissions allowed to a user by their roles are applied at a guild level</li>
+	<li>Overwrites that deny permissions for @everyone are applied at a channel level</li>
+	<li>Overwrites that allow permissions for @everyone are applied at a channel level</li>
+	<li>Overwrites that deny permissions for specific roles are applied at a channel level</li>
+	<li>Overwrites that allow permissions for specific roles are applied at a channel level</li>
+	<li>Member-specific overwrites that deny permissions are applied at a channel level</li>
+	<li>Member-specific overwrites that allow permissions are applied at a channel level</li>
+</ol>
+<h3>Lint Rules</h3>
+<p>
+	These are basic rules evaluated against a each role and overwrite.  (These are not official rules, and there may be
+	a reason for something that the rules detect.)
+</p>

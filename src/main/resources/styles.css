@@ -1,0 +1,125 @@
+/*------------------------------------------------------------*/
+.error {
+	color: red;
+}
+
+ul.roles {
+	list-style-type: none;
+}
+
+ul.roles > li {
+	margin-bottom: 0.25em;
+}
+
+.role, .overwrite {
+	display: inline-block;
+	margin-left: 0.25em;
+	padding: 0.25em 0.5em;
+	background-color: white;
+	border: 1px solid gray;
+	border-radius: 0.25em;
+	font-weight: bold;
+}
+
+.cosmetic-role {
+	display: inline-block;
+	margin-left: 0.25em;
+	padding: 0.25em 0.5em;
+	background-color: white;
+	border: 1px solid gray;
+	border-radius: 0.25em;
+}
+
+.role-permission {
+	display: inline-block;
+	margin-left: 0.25em;
+	padding: 0.1em 0.25em;
+	background-color: #ffc;
+	border: 1px solid gray;
+	border-radius: 0.25em;
+	font-size: 0.9em;
+}
+
+.role-permission.unnecessary, .overwrite.unnecessary {
+	border: 1px dotted silver;
+	color: gray;
+}
+
+/*------------------------------------------------------------*/
+ul.tree {
+	list-style-type: none;
+}
+
+ul.overwrites {
+	list-style-type: none;
+}
+
+ul.channels {
+	list-style-type: none;
+	margin-top: 1em;
+}
+
+.category {
+	font-weight: bold;
+}
+
+.channel {
+	display: inline-block;
+	padding: 0.5em 0.25em;
+	text-decoration: underline;
+	background-color: #ffc;
+}
+
+.channel.allow {
+	background-color: green;
+}
+
+.channel.deny {
+	background-color: red;
+}
+
+.channel-permission {
+	display: inline-block;
+	margin-left: 0.25em;
+	padding: 0.1em 0.25em;
+	background-color: #ffc;
+	border: 1px solid gray;
+	border-radius: 0.25em;
+	font-size: 0.9em;
+}
+
+.channel-permission.sync {
+	background-color: silver;
+}
+
+.channel-permission.allow {
+	color: white;
+	background-color: green;
+}
+
+.channel-permission.deny {
+	color: white;
+	background-color: red;
+}
+
+.channel-permission.unnecessary {
+	border: 1px dotted silver;
+	color: gray;
+}
+
+.channel-permission.allow.unnecessary {
+	background-color: #80ff80;
+}
+
+.channel-permission.deny.unnecessary {
+	background-color: #ff8080;
+}
+
+.permission-types {
+	border-collapse: collapse;
+}
+
+.permission-types th, .permission-types td {
+	border: 1px solid gray;
+	padding: 0.25em;
+}
