@@ -2,7 +2,7 @@ package nlw.template
 
 typealias ChannelType = discord4j.core.`object`.entity.channel.Channel.Type
 
-val ChannelType.displayName get() = toString().removePrefix("GUILD_").toLowerCase().capitalize()
+val ChannelType.displayName get() = toString().removePrefix("GUILD_").lowercase().replaceFirstChar(Char::uppercase)
 
 val defaultCategory = Channel(-1, "Uncategorized", ChannelType.GUILD_CATEGORY, null, arrayOf())
 

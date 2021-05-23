@@ -48,7 +48,7 @@ fun Application.module() {
 	}
 }
 
-private fun assetText(filename: String) = Server::class.java.getResource("/$filename").readText()
+private fun assetText(filename: String) = Server::class.java.getResource("/$filename")!!.readText()
 
 private fun formResponse(error: String? = null): HTML.() -> Unit = {
 	head {

@@ -62,6 +62,7 @@ class PermissionExtn(val order: Int, val clientName: String, val channelTypes: S
 				Permission.MOVE_MEMBERS to PermissionExtn(++order, "Move Members", voiceChannels, viewChannel),
 				Permission.USE_VAD to PermissionExtn(++order, "User Voice Activity", voiceChannels, viewChannel),
 				Permission.PRIORITY_SPEAKER to PermissionExtn(++order, "Priority Speaker", voiceChannels, viewChannel),
+				Permission.REQUEST_TO_SPEAK to PermissionExtn(++order, "Request to Speak", voiceChannels, viewChannel),
 			)
 		}
 

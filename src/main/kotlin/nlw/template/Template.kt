@@ -15,6 +15,8 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.Json
 import java.io.File
+import java.io.FileNotFoundException
+import java.lang.IllegalArgumentException
 import java.net.HttpURLConnection
 import java.net.URI
 import java.net.http.HttpClient
@@ -27,9 +29,20 @@ import java.net.http.HttpResponse
 
 @Serializable data class Template(val code: String, val serialized_source_guild: Server) {
 	companion object {
-		fun fromArg(arg: String) = runCatching { fromResource(arg) }.getOrElse { runCatching { fromFile(arg) }.getOrElse { fromKey(arg) } }
+		private fun chain(path: String, vararg sources: (String)->Template): Template {
+			sources.forEach {
+				try {
+					return it.invoke(path)
+				} catch (ignore: NullPointerException) {
+				} catch (ignore: FileNotFoundException) {
+				}
+			}
+			throw IllegalArgumentException("Path $path not found in source list.")
+		}
 
-		fun fromResource(path: String) = fromJson(Template::class.java.getResource(path).readText())
+		fun fromArg(arg:String) = chain(arg, ::fromResource, ::fromFile, :: fromKey)
+
+		fun fromResource(path: String) = fromJson(Template::class.java.getResource(path)!!.readText())
 
 		fun fromFile(path: String) = fromJson(File(".").combineSafe(path).readText())
 
@@ -83,19 +96,19 @@ object ChannelTypeSerializer : KSerializer<ChannelType> {
 
 @Serializer(forClass = PermissionType::class)
 object PermissionTypeSerializer : KSerializer<PermissionType> {
-	override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("discord4j.PermissionTypeSerializer", PrimitiveKind.INT)
+	override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("discord4j.PermissionTypeSerializer", PrimitiveKind.STRING)
 
-	override fun serialize(encoder: Encoder, value: PermissionType) = encoder.encodeInt(
+	override fun serialize(encoder: Encoder, value: PermissionType) = encoder.encodeString(
 		when (value) {
-			PermissionType.UNKNOWN -> -1
-			PermissionType.ROLE -> 0
-			PermissionType.MEMBER -> 1
+			PermissionType.UNKNOWN -> "unknown"
+			PermissionType.ROLE -> "role"
+			PermissionType.MEMBER -> "member"
 		}
 	)
 
-	override fun deserialize(decoder: Decoder): PermissionType = when (decoder.decodeInt()) {
-		0 -> PermissionType.ROLE
-		1 -> PermissionType.MEMBER
+	override fun deserialize(decoder: Decoder): PermissionType = when (decoder.decodeString()) {
+		"role" -> PermissionType.ROLE
+		"member" -> PermissionType.MEMBER
 		else -> PermissionType.UNKNOWN
 	}
 }
