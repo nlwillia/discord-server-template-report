@@ -177,7 +177,7 @@ private fun reportResponse(server: Server): HTML.() -> Unit = {
 									+channel.name
 								}
 
-								if (category.permission_overwrites.contentEquals(channel.permission_overwrites)) {
+								if (category.equalsOverwrites(channel)) {
 									span("channel-permission sync") { +"In Sync" }
 								} else {
 									printOverwrites(channel)

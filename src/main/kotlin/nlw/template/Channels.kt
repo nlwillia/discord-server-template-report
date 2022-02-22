@@ -13,7 +13,7 @@ fun channelsByCategory(server: Server, consumer: (Category) -> Unit) {
 		.map { channel ->
 			Category(
 				channel,
-				server.channels.filter { it.type != ChannelType.GUILD_CATEGORY && it.parent_id ?: defaultCategory.id == channel.id }.toList()
+				server.channels.filter { it.type != ChannelType.GUILD_CATEGORY && (it.parent_id ?: defaultCategory.id) == channel.id }.toList()
 			)
 		}.toList()
 
@@ -24,6 +24,8 @@ fun channelsByCategory(server: Server, consumer: (Category) -> Unit) {
 interface HasOverwrites {
 	val type: ChannelType
 	val permission_overwrites: Array<PermissionOverwrite>
+
+	fun equalsOverwrites(other: HasOverwrites) = this.permission_overwrites.sortedBy { it.id } == other.permission_overwrites.sortedBy { it.id }
 }
 
 /** Wraps a category-type channel and its children. */

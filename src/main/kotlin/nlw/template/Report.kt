@@ -36,7 +36,7 @@ fun dump(server: Server) {
 
 		category.children.forEach { channel ->
 			println("\t${channel.name} (${channel.id})")
-			if (category.permission_overwrites.contentEquals(channel.permission_overwrites)) {
+			if (category.equalsOverwrites(channel)) {
 				println("\t\tIn Sync")
 			} else {
 				channel.permission_overwrites.forEach { print("\t"); printOverwrite(it) }
